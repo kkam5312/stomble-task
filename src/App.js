@@ -49,6 +49,7 @@ function App() {
 
   const handleRegister = () => {
     setRegister(!register)
+    setError("");
   }
 
   const Register = (details) => {
