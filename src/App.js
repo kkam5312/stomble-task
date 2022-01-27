@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import LoginForm from './components/loginForm';
 import RegisterForm from './components/registerForm';
+import GoogleLogin from 'react-google-login';
 
 const initialUsers = [
   {username: "admin", password: "admin123"}, 
@@ -71,18 +72,32 @@ function App() {
     }
   }
 
+  const responseGoogle = (response) => {
+    console.log(response)
+    setUser({username: response.profileObj.name, password: ""})
+  }
+
   return (
     <div className="App">
       {(user.username !== "") ? (
         <div className='welcome'>
           <h2>Welcome, <span>{user.username}</span></h2>
-          <h3>Do you like.... glee?</h3>
+          <h3>Do you like.... hololive?</h3>
           <button onClick={Logout}>Logout</button>
         </div>  
       ) : (
-        (!register) ? (
-          <LoginForm Login={Login} error={error} handleRegister={handleRegister}/>
-        ) : (<RegisterForm Register={Register} error={error} handleRegister={handleRegister}/>)
+        <div className='loginForms'>
+          {((!register) ? (
+            <LoginForm Login={Login} error={error} handleRegister={handleRegister}/>
+          ) : (<RegisterForm Register={Register} error={error} handleRegister={handleRegister}/>))}
+          <GoogleLogin
+            clientId="354651288125-9hejnqlt9fpd2vt1bq1a0ofcs7ujn6nf.apps.googleusercontent.com"
+            buttonText="Log in with Google"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={'single_host_origin'}
+          />
+        </div>
       )}
       
       {console.log(register)}
