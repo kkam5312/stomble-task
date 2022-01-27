@@ -23,7 +23,7 @@ function App() {
     // Looping through valid users
     for (let i = 0; i < users.length; i++) {
       if (details.username === users[i].username && details.password === users[i].password) {
-        console.log("logged in");
+        console.log("logged in!");
         setUser({
           username: details.username, 
           password: details.password
