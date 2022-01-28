@@ -1,6 +1,7 @@
 import React, { useState} from 'react';
+import GoogleLogin from 'react-google-login';
 
-function LoginForm({ Login, error, handleRegister }) {
+function LoginForm({ Login, error, handleRegister, responseGoogle }) {
     const [details, setDetails] = useState({username:"", password:""});
 
     const submitHandler = e => {
@@ -22,9 +23,17 @@ function LoginForm({ Login, error, handleRegister }) {
                     <label htmlFor="password">Password:</label>
                     <input type="text" name="password" id="password" onChange={e => setDetails({...details, password: e.target.value})} value={details.password} />
                 </div>
-            </div>
             <input type="submit" value="Login" />
             <input type="button" onClick={handleRegister} value="Register an account" />
+            <GoogleLogin
+                clientId="354651288125-9hejnqlt9fpd2vt1bq1a0ofcs7ujn6nf.apps.googleusercontent.com"
+                buttonText="Log in with Google"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={'single_host_origin'}
+            />
+            </div>
+            
         </form>
     )
 }

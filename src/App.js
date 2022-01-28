@@ -87,16 +87,10 @@ function App() {
         </div>  
       ) : (
         <div className='loginForms'>
+          
           {((!register) ? (
-            <LoginForm Login={Login} error={error} handleRegister={handleRegister}/>
-          ) : (<RegisterForm Register={Register} error={error} handleRegister={handleRegister}/>))}
-          <GoogleLogin
-            clientId="354651288125-9hejnqlt9fpd2vt1bq1a0ofcs7ujn6nf.apps.googleusercontent.com"
-            buttonText="Log in with Google"
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
-            cookiePolicy={'single_host_origin'}
-          />
+            <LoginForm responseGoogle={responseGoogle} Login={Login} error={error} handleRegister={handleRegister}/>
+          ) : (<RegisterForm responseGoogle={responseGoogle} Register={Register} error={error} handleRegister={handleRegister}/>))}
         </div>
       )}
       
