@@ -19,12 +19,15 @@ function App() {
   const [user, setUser] = useState({username: "", password: ""})
   const [error, setError] = useState("")
 
+  /**
+   * Basic login function
+   * @param {*} details 
+   * If the user is valid, this function will set the current user and they will proceed to the welcome page.
+   */
   const Login = details => {
-    console.log(details);
     // Looping through valid users
     for (let i = 0; i < users.length; i++) {
       if (details.username === users[i].username && details.password === users[i].password) {
-        console.log("logged in.");
         setUser({
           username: details.username, 
           password: details.password
@@ -36,44 +39,50 @@ function App() {
       }
     }
     if (user.username === "" && user.password === "") {
-      console.log("details do not match");
       setError("Invalid username or password. Please try again");
     }
   }
 
-  const Logout = () => {
-    console.log("Logout");
+  /*
+  * Basic logout function
+  * Resets the current user to an empty user. Also resets the error message. 
+  */
+  const Logout = () => {;
     setError("");
     setUser({username: "", password: ""});
-    console.log(user)
   }
-
+  /**
+   * Allows the interface to switch between the register and login screens by manipulating the {register} boolean constant. 
+   */
   const handleRegister = () => {
     setRegister(!register)
     setError("");
   }
-
+  /**
+   * Basic register function
+   * @param {*} details 
+   * Will check whether the username and password entered is valid (non-empty and contains more than 3 characters for the password)
+   * If valid, inserts the new user into the users list. 
+   */
   const Register = (details) => {
-    console.log("registering new user");
-    console.log(details)
     if (details.username.length > 0 && details.password.length >= 4) {
       const newList = users.concat({username: details.username, password: details.password});
       setUsers(newList);
-      console.log("added user to registered users list")
-      console.log("logged in");
       setUser({
         username: details.username, 
         password: details.password
       });
       setError("");
     } else {
-      console.log("invalid register details");
       setError("Please use a valid username and a password more than 3 characters.");
     }
   }
-
+  /**
+   * Handler for the google login button
+   * @param {*} response 
+   * Will log the user in using the information provided from the google account used. 
+   */
   const responseGoogle = (response) => {
-    console.log(response)
     setUser({username: response.profileObj.name, password: ""})
   }
 
@@ -87,14 +96,11 @@ function App() {
         </div>  
       ) : (
         <div className='loginForms'>
-          
           {((!register) ? (
             <LoginForm responseGoogle={responseGoogle} Login={Login} error={error} handleRegister={handleRegister}/>
           ) : (<RegisterForm responseGoogle={responseGoogle} Register={Register} error={error} handleRegister={handleRegister}/>))}
         </div>
       )}
-      
-      {console.log(register)}
     </div>
   );
 }

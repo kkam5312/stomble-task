@@ -2,11 +2,12 @@ import React, { useState} from 'react';
 import GoogleLogin from 'react-google-login';
 
 function LoginForm({ Login, error, handleRegister, responseGoogle }) {
+    // We will pass the values the form returns into this variable
     const [details, setDetails] = useState({username:"", password:""});
 
     const submitHandler = e => {
         e.preventDefault();
-
+        // Calls the login function from app.js
         Login(details)
     }
 
