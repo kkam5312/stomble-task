@@ -91,7 +91,7 @@ function App() {
       {(user.username !== "") ? (
         <div className='welcome'>
           <h2>Welcome, <span>{user.username}</span></h2>
-          <h3>Do you like.... hololive?</h3>
+          <h3>Yep, this is the website.</h3>
           <button onClick={Logout}>Logout</button>
         </div>  
       ) : (
